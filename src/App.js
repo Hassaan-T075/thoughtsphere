@@ -8,6 +8,7 @@ import ChangePassword from './screens/ChangePassword';
 import AddBlog from './screens/blogs/AddBlog';
 import MyBlogs from './screens/blogs/MyBlogs';
 import EditBlogs from './screens/blogs/EditBlogs';
+import Notifications from './screens/Notifications';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/blogs/add-blog" element={ <AddBlog/ >}></Route>
           <Route exact path="/blogs/my-blogs" element={ <MyBlogs/ >}></Route>
           <Route exact path="/blogs/edit-blog" element={ <EditBlogs/ >}></Route>
+          <Route exact path="/notifications" element={ <Notifications/ >}></Route>
         </Routes>
       </div>
     </Router>
