@@ -1,9 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import {useNavigate} from "react-router-dom"
 
 
 const MyBlogs = () => {
+    const navigate = useNavigate(); 
     const blogsData = [
         {
           "id": 1,
@@ -97,7 +98,7 @@ const MyBlogs = () => {
   return (
     <div className="container-fluid bg-dark min-vh-100">
       <div className="d-flex flex-wrap justify-content-center align-items-start pt-5">
-        {blogsData.map(blog => blogsCard(blog))}
+        {blogsData.map(blog => <div onClick={()=>navigate("/blogs/edit-blog", {state: blog})}>{blogsCard(blog)}</div>)}
       </div>
     </div>
   );

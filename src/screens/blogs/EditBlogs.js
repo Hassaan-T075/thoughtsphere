@@ -1,13 +1,9 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-
-const BlogEdit = ({props = {
-    "id": 11,
-    "title": "Living a Sustainable Life",
-    "summary": "Tips and tricks for adopting a more sustainable lifestyle in the modern world.",
-    "date": "2023-11-12"
-}}) => {
- 
+const BlogEdit = () => {
+    const location = useLocation();
+    const props = location.state;
  
 return( <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
 <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '90vh' }}>
@@ -20,7 +16,7 @@ return( <div className="container-fluid bg-dark min-vh-100 d-flex align-items-ce
             <h3 className="mb-4">Edit Blog</h3>
             <button type="button" className="btn btn-danger">
               <i className="bi bi-trash"></i>
-              
+
             </button>
           </div>
 
