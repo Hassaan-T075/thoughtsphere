@@ -1,8 +1,10 @@
 
 import React from 'react';
+import {useNavigate} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d2317cece28bd6b0e24ad9fd8.png", username = "Chungus", totalBlogs = "25", onChangePassword }) => {
+  const navigate = useNavigate(); 
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
           <div className="card text-white bg-secondary mb-3" style={{ width: '60vh', maxWidth: '1200px', height: '60vh' }}>
@@ -15,7 +17,7 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
               <br />
               <br />
               <br />
-              <button className="btn btn-danger" onClick={onChangePassword}>Change Password</button>
+              <button className="btn btn-danger" onClick={()=>navigate("/change-password")}>Change Password</button>
             </div>
           </div>
         </div>
