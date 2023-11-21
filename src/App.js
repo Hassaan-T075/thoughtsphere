@@ -1,15 +1,15 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './screens/auth/Login';
-import Signup from './screens/auth/Signup';
-import Homepage from './screens/home/Homepage';
-import Profile from './screens/Profile';
-import ChangePassword from './screens/ChangePassword';
-import AddBlog from './screens/blogs/AddBlog';
-import MyBlogs from './screens/blogs/MyBlogs';
-import EditBlogs from './screens/blogs/EditBlogs';
-import Notifications from './screens/Notifications';
-import RecentBlogs from './screens/blogs/recentBlogs';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
+import Homepage from './home/Homepage';
+import Profile from './services/Profile';
+import ChangePassword from './services/ChangePassword';
+import AddBlog from './blogs/AddBlog';
+import MyBlogs from './blogs/MyBlogs';
+import EditBlogs from './blogs/EditBlogs';
+import Notifications from './services/Notifications';
+import RecentBlogs from './blogs/recentBlogs';
 
 
 function App() {
