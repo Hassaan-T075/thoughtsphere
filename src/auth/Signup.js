@@ -12,6 +12,8 @@ const Signup = () => {
     const [lastname, setLname] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [discord, setDiscord] = useState('');
+    const [reddit, setReddit] = useState('');
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -62,7 +64,22 @@ const Signup = () => {
                         Password
                     </Form.Label>
                     <Col xs="auto">
-                        <Form.Control size="lg" type="text" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <Form.Control size="lg" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    </Col>
+                </Row>
+                <br />
+                <Row className="justify-content-md-center">
+                    <Form.Label column="lg" lg={2}>
+                        Discord
+                    </Form.Label>
+                    <Col xs="auto">
+                        <Form.Control size="lg" type="text" placeholder="discord" onChange={(e) => setDiscord(e.target.value)} />
+                    </Col>
+                    <Form.Label column="lg" lg={2}>
+                        Reddit
+                    </Form.Label>
+                    <Col xs="auto">
+                        <Form.Control size="lg" type="text" placeholder="reddit" onChange={(e) => setReddit(e.target.value)} />
                     </Col>
                 </Row>
                 <br />
@@ -76,6 +93,7 @@ const Signup = () => {
                             {isLoading ? 'Loading…' : 'Sign up'}
                         </Button>
                     </Col>
+                    <label>{error}</label>
                 </Row>
 
             </Container>

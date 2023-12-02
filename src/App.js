@@ -22,18 +22,18 @@ function App() {
           <Route exact path="/auth/login" element={<Login />}></Route>
           <Route exact path="/auth/signup" element={<Signup />}></Route>
           <Route path="/" element={<Homepage />}>
-            <Route index element={<Blank />} />
+            <Route index element={<RecentBlogs />} />
             <Route path='/myblogs' element={<MyBlogs />} />
             <Route path='/addnew' element={<AddBlog />} />
-            <Route path='/user' element={<Blank />} />
             <Route path='/notif' element={<Notifications />} />
+            <Route path='/auth/login' element={<Login />} />
           </Route>
           <Route exact path="/profile" element={<Profile />}></Route>
           <Route exact path="/change-password" element={<ChangePassword />}></Route>
-          <Route exact path="/blogs/add-blog" element={<AddBlog />}></Route>
-          <Route exact path="/blogs/my-blogs" element={<MyBlogs />}></Route>
+          {/* <Route exact path="/blogs/add-blog" element={<AddBlog />}></Route> */}
+          {/* <Route exact path="/blogs/my-blogs" element={<MyBlogs />}></Route> */}
           <Route exact path="/blogs/edit-blog" element={<EditBlogs />}></Route>
-          <Route exact path="/blogs/recent-blogs" element={<RecentBlogs />}></Route>
+          {/* <Route exact path="/blogs/recent-blogs" element={<RecentBlogs />}></Route> */}
           <Route exact path="/notifications" element={<Notifications />}></Route>
         </Routes>
       </div>

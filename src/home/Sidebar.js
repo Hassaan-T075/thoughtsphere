@@ -23,16 +23,16 @@ const sidebarNavItems = [
         section: 'addnew'
     },
     {
-        display: 'User',
-        icon: <i className='bx bx-user'></i>,
-        to: '/user',
-        section: 'user'
-    },
-    {
         display: 'Notifications',
         icon: <i className='bx bx-receipt'></i>,
         to: '/notif',
         section: 'notif'
+    },
+    {
+        display: 'Log out',
+        icon: <i className='bx bx-user'></i>,
+        to: '/auth/login',
+        section: 'logout'
     },
 ]
 
@@ -61,12 +61,12 @@ const Sidebar = () => {
     return <>
         <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Thoughtsphere</Navbar.Brand>
+                <Navbar.Brand href="/">Thoughtsphere</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/thoughts">Thoughts</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        {/* <Nav.Link href="/thoughts">Thoughts</Nav.Link> */}
                         <Nav.Link href="/profile">Profile</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
