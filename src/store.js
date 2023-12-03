@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import activeuser from "./activeuser/activeuser";
+import activeReducer from './features/active/activeSlice'
 
 const store = configureStore({
   reducer: {
-    active: activeuser,
+    active: activeReducer,
   },
 });
 

@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateEmail, updateSocials, updateToken, updateUsername } from "../activeuser/activeuser";
+import { updateEmail, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Signup = () => {
 

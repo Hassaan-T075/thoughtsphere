@@ -7,8 +7,8 @@ const initialState = {
     socials: [],
 };
 
-const userSlice = createSlice({
-    name: "user",
+const activeSlice = createSlice({
+    name: "active",
     initialState,
     reducers: {
         updateUsername: (state, action) => {
@@ -22,13 +22,15 @@ const userSlice = createSlice({
         },
         updateSocials: (state, action) => {
             state.socials.splice(0, state.socials.length)
-            action.payload.forEach(element => {
-                state.socials.push(element)
-            });
-          },
+            if (action.payload.length > 0) {
+                action.payload.forEach(element => {
+                    state.socials.push(element)
+                });
+            }
+        },
     },
 });
 
-export const { updateUsername, updateEmail, updateToken, updateSocials } = userSlice.actions;
+export const { updateUsername, updateEmail, updateToken, updateSocials } = activeSlice.actions;
 
-export default userSlice.reducer;
+export default activeSlice.reducer;

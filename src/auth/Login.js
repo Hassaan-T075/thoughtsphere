@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateEmail, updateSocials, updateToken, updateUsername } from "../activeuser/activeuser";
+import { updateEmail, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Login = () => {
 
@@ -47,7 +47,7 @@ const Login = () => {
             setLoading(false);
         if(data.msg === 'Success')
         {
-                console.log("Logged In");
+                // console.log("Logged In");
                 navigate('/');   
         }
         else 
@@ -55,8 +55,8 @@ const Login = () => {
             setError(data.msg);
         }
             // console.log(userdata.token)
-            console.log('logged in');   
-            console.log(data);
+            // console.log('logged in');   
+            // console.log(data);
 
             // redux operations
             dispatch(updateEmail(data.profile.email))

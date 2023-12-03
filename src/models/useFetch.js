@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useFetch = (url) => {
     const [data, setData] = useState(null)
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null)
+    const token = useSelector((state) => state.active.token);
 
     useEffect(() => {
         const abortCont = new AbortController();
-        //console.log(userdata.token)
-        const token = userdata.token
+        console.log(token)
 
         fetch(url, {
             signal: abortCont.signal,
@@ -35,7 +36,7 @@ const useFetch = (url) => {
                 }
             })
         return () => abortCont.abort() //to counter react state update on un-mounted component, abort controller is used 
-    }, [url])
+    }, [url,token])
 
     return { data, isPending, error }
 }
