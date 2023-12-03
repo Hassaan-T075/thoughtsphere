@@ -10,7 +10,6 @@ import MyBlogs from './blogs/MyBlogs';
 import EditBlogs from './blogs/EditBlogs';
 import Notifications from './services/Notifications';
 import RecentBlogs from './blogs/recentBlogs';
-import Blank from './Blank';
 import './App.scss'
 
 

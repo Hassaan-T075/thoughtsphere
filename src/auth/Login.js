@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateEmail, updateSocials, updateToken, updateUsername } from "../activeuser/activeuser";
 
 const Login = () => {
 
@@ -13,6 +15,7 @@ const Login = () => {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // useEffect(() => {
     //     function simulateNetworkRequest() {
@@ -30,7 +33,6 @@ const Login = () => {
 
         e.preventDefault();
         const body = { email, password };
-        console.log(email, password)
         setLoading(true)
 
         fetch('http://localhost:3000/api/auth/login', {
@@ -55,6 +57,12 @@ const Login = () => {
             // console.log(userdata.token)
             console.log('logged in');   
             console.log(data);
+
+            // redux operations
+            dispatch(updateEmail(data.profile.email))
+            dispatch(updateUsername(data.profile.username))
+            dispatch(updateToken(data.token))
+            dispatch(updateSocials(data.profile.socials))
            
         }).catch((err) => {
             console.log(err.message)

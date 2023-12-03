@@ -5,6 +5,7 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord, faRedditAlien, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import Sidebar from './Sidebar'
+import store from '../store';
 
 const HomePage = () => {
   return (
@@ -75,6 +76,7 @@ const HomePage = () => {
     }}>
       <Sidebar />
       <Outlet />
+      {/* {console.log(store.getState())} */}
     </div>
   );
 };
