@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateEmail, updateSocials, updateToken, updateUsername } from "../activeuser/activeuser";
 
 const Signup = () => {
 
@@ -17,13 +19,14 @@ const Signup = () => {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleClick = (e) => {
 
         const username = firstname;
-        const social = {reddit, discord}
+        const social = { reddit, discord }
         e.preventDefault() //prevents poge from refreshing
-        const user = { username, password, email, social}
+        const user = { username, password, email, social }
 
         setLoading(true)
 
@@ -35,33 +38,44 @@ const Signup = () => {
                 'Access-Control-Request-Method': 'POST'
             },
             body: JSON.stringify(user) // 'stringify' converts 'blog object' into 'json string'
-        }).then((response) => {            
-                setLoading(false);
-                if(response.status === 200)
-                {
-                    navigate('/');
-                }
-                else if(response.status === 409)
-                {
-                    setError("User Already Exists");
-                }
-                else 
-                {
-                    setError("Error Occured, Please Register Again")
-                }
-               
-            }).catch((err) => {
-                setError(err.message);
-                console.log(err.message)
-            })
+        }).then((response) => response.json())
+        .then((data) => {
+            setLoading(false);
+            if (data.msg === 'Success') {
+                navigate('/');
+            }
+            else if (data.msg === 'User Already Exist. Please Login.') {
+                setError("User Already Exists");
+            }
+            else if (data.msg === 'All input is required') {
+                setError("All input is required");
+            }
+            else {
+                setError("Error Occured, Please Register Again")
+            }
+
+            // console.log(userdata.token)
+            console.log('logged in');
+            console.log(data);
+
+            // redux operations
+            dispatch(updateEmail(data.profile.email))
+            dispatch(updateUsername(data.profile.username))
+            dispatch(updateToken(data.token))
+            dispatch(updateSocials(data.profile.socials))
+
+        }).catch((err) => {
+            setError(err.message);
+            console.log(err.message)
+        })
     }
 
     return (
         <>
             <AuthNavbar />
-            <br/>
+            <br />
             <Container className="p-5 border border-info rounded-pill">
-                <br/>
+                <br />
                 <Row className="justify-content-md-center">
                     <Form.Label column="lg" lg={2}>
                         First Name
