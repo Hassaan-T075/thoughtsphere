@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const UpdateProfile = () => {
 
   const [newuser, setNewuser] = useState("")
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const navigate = useNavigate();
 
   const storedData = localStorage.getItem('userdata')
