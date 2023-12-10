@@ -3,52 +3,12 @@ import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
 
-const EditBlog = () => {
+const ViewBlog = () => {
   const location = useLocation();
   const blog = location.state;
-  const token = useSelector((state) => state.active.token);
 
-  // State for title and body
-  const [title, setTitle] = useState(blog ? blog.title : '');
-  const [body, setBody] = useState(blog ? blog.body : '');
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleBodyChange = (e) => {
-    setBody(e.target.value);
-  };
  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault(); 
-
-    const updatedBlog = {
-      email: blog.email,
-      title: title,
-      body: body,
-    };
-
-    try {
-
-      const response = await axios.patch(`http://localhost:3000/api/home/blogs/${blog._id}`, updatedBlog, { headers: {
-        'Authorization': `Bearer ${token}`
-    }});
- 
-      alert("Blog updated")
-    
-    } catch (error) {
-      alert("Error Updating Blog")
-      
-    }
-   
-  };
-  
    return (
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
       <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '100vh' }}>
@@ -74,29 +34,43 @@ const EditBlog = () => {
         </button>
         <p>{blog.likes.length} Likes</p>
       </div>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="mb-3">
               <label htmlFor="blogTitle" className="form-label">Blog Title</label>
-              <input type="text" className="form-control" id="blogTitle" placeholder="Enter title"  value={title} onChange={handleTitleChange} />
+              <input type="text" className="form-control" id="blogTitle" placeholder="Enter title"  value={blog ? blog.title : ''}  />
             </div>
 
             <div className="mb-3">
               <label htmlFor="blogBody" className="form-label">Blog Body</label>
-              <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={body} onChange={handleBodyChange}></textarea>
-            </div>    
+              <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={blog ? blog.body : ''}></textarea>
+            </div>
+            
+            
+            <h5 className="mb-0">Comments</h5> {/* mb-0 removes any default bottom margin from the heading */}
+            <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            
+            {blog.comments.map((comment, index) => (
+              <div key={index} className="card bg-light mb-2">
+                <div className="card-body">
+                  <h6 className="card-subtitle mb-2 text-muted">{comment.email}</h6>
+                  <p className="card-text">{comment.comment}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+         
            
             <br />
             <br />
             
-            <div className="text-center">
-              <button type="submit" className="btn btn-primary" style ={{ width: '40%'}}>Update Blog</button>
-            </div>
+            {/* <div className="text-center">
+              <button type="submit" className="btn btn-primary" style ={{ width: '40%'}}>Add Blog</button>
+            </div> */}
           </form>
         </div>
-      
       </div>
     </div>
   );
 };
 
-export default EditBlog;
+export default ViewBlog;

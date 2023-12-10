@@ -9,7 +9,8 @@ import AddBlog from './blogs/AddBlog';
 import MyBlogs from './blogs/MyBlogs';
 import EditBlogs from './blogs/EditBlogs';
 import Notifications from './services/Notifications';
-import RecentBlogs from './blogs/recentBlogs';
+import RecentBlogs from './blogs/RecentBlogs';
+import ViewBlog from './blogs/ViewBlog'
 import './App.scss'
 
 
@@ -32,6 +33,7 @@ function App() {
           {/* <Route exact path="/blogs/add-blog" element={<AddBlog />}></Route> */}
           {/* <Route exact path="/blogs/my-blogs" element={<MyBlogs />}></Route> */}
           <Route exact path="/blogs/edit-blog" element={<EditBlogs />}></Route>
+          <Route exact path="/blogs/view-blog" element={<ViewBlog />}></Route>
           {/* <Route exact path="/blogs/recent-blogs" element={<RecentBlogs />}></Route> */}
           <Route exact path="/notifications" element={<Notifications />}></Route>
         </Routes>
