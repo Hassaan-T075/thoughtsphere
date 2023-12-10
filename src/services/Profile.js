@@ -2,7 +2,6 @@ import React from 'react';
 import {useNavigate} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
-import userdata from "../services/Credentials";
 
 const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d2317cece28bd6b0e24ad9fd8.png", onChangePassword }) => {
   const navigate = useNavigate(); 

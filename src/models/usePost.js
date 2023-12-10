@@ -6,7 +6,10 @@ const usePost = (url, payload) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
-    const token = useSelector((state) => state.active.token);
+
+    const storedData = localStorage.getItem('userdata')
+    const userdata = storedData ? JSON.parse(storedData) : {};
+    const token = userdata.token
 
     useEffect(() => {
         const source = axios.CancelToken.source();
