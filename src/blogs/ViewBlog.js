@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import useGet from '../models/useGet';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const ViewBlog = () => {
@@ -11,8 +13,57 @@ const ViewBlog = () => {
   const blog = location.state;
   const blogsUrl = `http://localhost:3000/api/home/blogs/${blog._id}`;
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
+  const token = useSelector((state) => state.active.token);
+
+    // State to manage dialog visibility
+    const [showDialog, setShowDialog] = useState(false);
+
+    const [comment, setComment] = useState('');
+
+    // Function to handle dialog close
+    const handleCloseDialog = () => setShowDialog(false);
+  
+    // Function to handle dialog open
+    const handleOpenDialog = () => setShowDialog(true);
+  
+    // Function to handle comment submission
+    
 
 
+    const handleCommentChange = (e) => {
+      setComment(e.target.value);
+    };
+    const handleSubmitComment = async (event) => {
+      event.preventDefault();
+      const newComment = {      
+        id: blog._id,
+        email: "test",
+        comment: comment
+      }
+    
+      console.log(newComment)
+      console.log(token)
+  
+      try {
+         
+        const response = await axios.post('http://localhost:3000/api/home/blogs/add-comment', newComment, { headers: {
+          'Authorization': `Bearer ${token}`
+      }});
+   
+        alert("comment added")
+      
+      } catch (error) {
+        console.log(error)
+        alert("Error adding added")
+        
+      }
+     
+
+      console.log(comment);
+      // Logic to handle comment submission
+      handleCloseDialog();
+    };
+  
 
  
    return (
@@ -76,6 +127,34 @@ const ViewBlog = () => {
           </form>
         </div>
       </div>
+      <button className="btn btn-primary" onClick={handleOpenDialog}>
+        Add Comment
+      </button>
+
+      {/* Comment Dialog */}
+      {showDialog && (
+        <div className="modal show" style={{ display: 'block' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Add Comment</h5>
+               
+              </div>
+              <div className="modal-body">
+                <textarea className="form-control" placeholder="Your comment" value={comment} onChange={handleCommentChange}></textarea>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={handleCloseDialog}>
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary" onClick={handleSubmitComment}>
+                  Submit Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

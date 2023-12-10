@@ -7,31 +7,37 @@ const sidebarNavItems = [
     {
         display: 'Dashboard',
         icon: <i className='bx bx-home'></i>,
-        to: '/',
+        to: '',
         section: ''
     },
     {
         display: 'My Blogs',
         icon: <i className='bx bx-star'></i>,
-        to: '/myblogs',
+        to: 'myblogs',
         section: 'myblogs'
     },
     {
         display: 'Add Blog',
         icon: <i className='bx bx-calendar'></i>,
-        to: '/addnew',
+        to: 'addnew',
         section: 'addnew'
     },
     {
         display: 'Notifications',
         icon: <i className='bx bx-receipt'></i>,
-        to: '/notif',
+        to: 'notif',
         section: 'notif'
+    },
+    {
+        display: 'Bookmarks',
+        icon: <i className='bx bx-user'></i>,
+        to: 'bookmarks',
+        section: 'bookmarks'
     },
     {
         display: 'Log out',
         icon: <i className='bx bx-user'></i>,
-        to: '/auth/login',
+        to: 'auth/login',
         section: 'logout'
     },
 ]
