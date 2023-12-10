@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthNavbar from "./AuthNavbar";
 import Col from 'react-bootstrap/Col';
@@ -55,8 +55,7 @@ const Signup = () => {
             }
 
             // console.log(userdata.token)
-            console.log('logged in');
-            console.log(data);
+          
 
             // redux operations
             dispatch(updateEmail(data.profile.email))
@@ -66,7 +65,7 @@ const Signup = () => {
 
         }).catch((err) => {
             setError(err.message);
-            console.log(err.message)
+        
         })
     }
 

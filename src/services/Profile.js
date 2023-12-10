@@ -1,7 +1,6 @@
 import React from 'react';
 import {useLocation, useNavigate} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useSelector } from 'react-redux';
 import useGet from '../models/useGet';
 import { FaFacebook, FaWhatsapp } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
 
@@ -12,9 +11,8 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
   const blog = location.state;
   const blogsUrl = `http://localhost:3000/api/home/profile`;
   const { data: profileData, isPending, error } = useGet(blogsUrl);
-  console.log(profileData);
   const userdata = storedData ? JSON.parse(storedData) : {};
-  console.log(userdata)
+
  
    const handleFacebookClick = () => {
    

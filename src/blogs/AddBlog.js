@@ -36,14 +36,14 @@ const AddBlog = () => {
       const response = await axios.post(`http://localhost:3000/api/home/new-blog`, newBlog, { headers: {
         'Authorization': `Bearer ${token}`
     }});
-    console.log(response)
+  
     setTitle('')
     setBody('')
  
       alert("Blog Added")
     
     } catch (error) {
-      alert("Error Updating Blog")
+      alert("Error Adding Blog")
       
     }
    

@@ -5,7 +5,7 @@ import usePost from '../models/usePost';
 const Notifications = () => {
   const blogsUrl = 'http://localhost:3000/api/home/blogs/notifications';
   const { data: notifications, isPending, error } = usePost(blogsUrl);
-  console.log(notifications);
+  
  
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import usePost from '../models/usePost';
 import { useNavigate } from 'react-router-dom';
 
 const UpdateProfile = () => {
 
   const [newuser, setNewuser] = useState("")
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const navigate = useNavigate();
 
   const storedData = localStorage.getItem('userdata')
@@ -32,8 +30,6 @@ const UpdateProfile = () => {
       if (!response.ok) {
         console.error(`Error: ${response.status} - ${response.statusText}`);
       } else {
-        const data = await response.json();
-        console.log('Update successful:', data);
         userdata.username = newuser;
         navigate('/auth/login');
       }

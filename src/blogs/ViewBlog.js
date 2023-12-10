@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import useGet from '../models/useGet';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 
 const ViewBlog = () => {
@@ -17,26 +16,74 @@ const ViewBlog = () => {
   const userdata = storedData ? JSON.parse(storedData) : {};
   const token = userdata.token
 
-  // State to manage dialog visibility
   const [showDialog, setShowDialog] = useState(false);
 
   const [comment, setComment] = useState('');
 
   const [isBookmarked, setIsBookmarked] = useState(false);
-
-  // Function to handle dialog close
+  const [isLiked, setisLiked] = useState(false);
   const handleCloseDialog = () => setShowDialog(false);
-
-  // Function to handle dialog open
   const handleOpenDialog = () => setShowDialog(true);
 
-  // Function to handle comment submission
 
 
 
+  const handleLikeOnClick = async () =>
+  {
+    try {
+
+      const response = await axios.post('http://localhost:3000/api/home/blogs/like',{
+  
+      "user_like": blogsData.blog.email,
+      "id": blogsData.blog._id
+  
+  },
+   {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      alert(response.data.msg)
+      setisLiked(true)
+
+    } catch (error) {
+    
+      alert("Error adding added")
+
+    }
+
+  }
+  const handleFollowOnClick = async () =>
+  {
+    try {
+
+      const response = await axios.post('http://localhost:3000/api/home/profile/follow',{
+  
+      "user_follow": blogsData.blog.email
+  
+  },
+   {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      alert(response.data.msg)
+   
+
+    } catch (error) {
+    
+      alert("Error adding added")
+
+    }
+
+  }
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
+
+
   const handleSubmitComment = async (event) => {
     event.preventDefault();
     const newComment = {
@@ -44,9 +91,6 @@ const ViewBlog = () => {
       email: "test",
       comment: comment
     }
-
-    console.log(newComment)
-    console.log(token)
 
     try {
 
@@ -59,14 +103,11 @@ const ViewBlog = () => {
       alert("comment added")
 
     } catch (error) {
-      console.log(error)
+   
       alert("Error adding added")
 
     }
 
-
-    console.log(comment);
-    // Logic to handle comment submission
     handleCloseDialog();
   };
 
@@ -110,10 +151,12 @@ const ViewBlog = () => {
 
           <h3 className="card-title text-center mb-4">Blog</h3>
           {blogsData && (
-            <div className="text-white mb-3">
-              <strong>Written by:</strong> {blogsData.blog.email}
-            </div>
-          )}
+  <div className="d-flex justify-content-center align-items-center text-white mb-3">
+    <strong>Written by:</strong> {blogsData.blog.email}
+    <button className="btn btn-primary ms-2" onClick={handleFollowOnClick}>Follow User</button>
+  </div>
+)}
+
           {blogsData && (
             <div className="text-white mb-3">
               <strong>Posted on:</strong> {new Date(blogsData.blog.createdAt).toLocaleDateString()}
@@ -121,8 +164,8 @@ const ViewBlog = () => {
           )}
           {blogsData && (
             <div className="text-center">
-              <button className="btn btn-link text-decoration-none">
-                <FontAwesomeIcon icon={faHeart} className="text-danger" />
+              <button className="btn btn-link text-decoration-none" onClick={handleLikeOnClick}>
+                <FontAwesomeIcon icon={faHeart} className={`${isLiked ? 'text-danger' : 'text-white'}`} />
               </button>
               <p>{blogsData.blog.likes.length} Likes</p>
               <button className="btn btn-link text-decoration-none" onClick={handleBookmark}>
@@ -140,9 +183,13 @@ const ViewBlog = () => {
               <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={blogsData ? blogsData.blog.body : ''}></textarea>
             </div>
 
-
+            <button className="btn btn-primary" onClick={handleOpenDialog}>
+        Add Comment
+      </button>
+      <br />
+      <br />
             <h5 className="mb-0">Comments</h5> {/* mb-0 removes any default bottom margin from the heading */}
-            <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            <div className="mt-4" style={{ maxHeight: '100px', overflowY: 'auto' }}>
 
               {blogsData && blogsData.blog.comments.map((comment, index) => (
                 <div key={index} className="card bg-light mb-2">
@@ -164,9 +211,7 @@ const ViewBlog = () => {
           </form>
         </div>
       </div>
-      <button className="btn btn-primary" onClick={handleOpenDialog}>
-        Add Comment
-      </button>
+     
 
       {/* Comment Dialog */}
       {showDialog && (

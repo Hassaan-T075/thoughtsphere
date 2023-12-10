@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const useGet = (url) => {
@@ -24,7 +23,7 @@ const useGet = (url) => {
                 });
                 setIsPending(false);
                 setData(response.data);
-                console.log(response.data)
+           
                 setError(null);
             } catch (error) {
                 if (!axios.isCancel(error)) {
