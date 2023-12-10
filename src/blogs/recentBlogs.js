@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios  from 'axios';
 import { useState, useEffect } from 'react';
 import useGet from '../models/useGet';
+import {useNavigate} from "react-router-dom"
 import { useSelector } from 'react-redux';
 
 
@@ -10,17 +11,7 @@ import { useSelector } from 'react-redux';
 const RecentBlogs = () => {
   const blogsUrl = 'http://localhost:3000/api/home/blogs';
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
-  console.log(blogsData)
-
-  // const blogsData = [
-  //   {
-  //     "id": 12,
-  //     "title": "Mastering Meditation",
-  //     "body": "Guidance on deepening your meditation practice for inner peace and clarity.",
-  //     "createdAt": "2023-12-01"
-  //   }]
-
-
+  const navigate = useNavigate(); 
   
   const blogsCard = (blog) => {
     return (
@@ -40,7 +31,7 @@ const RecentBlogs = () => {
       <div className="d-flex flex-wrap justify-content-center align-items-start pt-5">
       {isPending && <p>Loading blogs...</p>}
         {error && <p>Error fetching blogs: {error}</p>}
-        { blogsData  && blogsData.blogs.map(blog => blogsCard(blog))}
+        { blogsData  && blogsData.blogs.map(blog => <div onClick={()=>navigate("/blogs/view-blog", {state: blog})}>{blogsCard(blog)}</div>)}
       </div>
     </div>
   );

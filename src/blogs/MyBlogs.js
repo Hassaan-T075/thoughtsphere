@@ -28,7 +28,7 @@ const MyBlogs = () => {
         {/* {blogsData.map(blog => <div onClick={()=>navigate("/blogs/edit-blog", {state: blog})}>{blogsCard(blog)}</div>)} */}
         {isPending && <p>Loading blogs...</p>}
         {error && <p>Error fetching blogs: {error}</p>}
-        { blogsData  && blogsData.blogs.map(blog => <div onClick={()=>navigate("/blogs/view-blog", {state: blog})}>{blogsCard(blog)}</div>)}
+        { blogsData  && blogsData.blogs.map(blog => <div onClick={()=>navigate("/blogs/edit-blog", {state: blog})}>{blogsCard(blog)}</div>)}
       </div>
     </div>
   );

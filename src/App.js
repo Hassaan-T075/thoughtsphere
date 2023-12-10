@@ -9,7 +9,7 @@ import AddBlog from './blogs/AddBlog';
 import MyBlogs from './blogs/MyBlogs';
 import EditBlogs from './blogs/EditBlogs';
 import Notifications from './services/Notifications';
-import RecentBlogs from './blogs/recentBlogs';
+import RecentBlogs from './blogs/RecentBlogs';
 import ViewBlog from './blogs/ViewBlog'
 import './App.scss'
 

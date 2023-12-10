@@ -7,23 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const ViewBlog = () => {
   const location = useLocation();
   const blog = location.state;
-  const comments = [
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    { comment: "Hello, I am adding a comment", email: "ali@gmail.com" },
-    // ... add more comments as needed
-  ];
-  console.log("Hiiiii")
-  console.log(blog)
+
  
    return (
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
@@ -65,7 +49,7 @@ const ViewBlog = () => {
             <h5 className="mb-0">Comments</h5> {/* mb-0 removes any default bottom margin from the heading */}
             <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
             
-            {comments.map((comment, index) => (
+            {blog.comments.map((comment, index) => (
               <div key={index} className="card bg-light mb-2">
                 <div className="card-body">
                   <h6 className="card-subtitle mb-2 text-muted">{comment.email}</h6>
