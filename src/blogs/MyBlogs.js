@@ -6,7 +6,7 @@ import useGet from '../models/useGet';
 const MyBlogs = () => {
   const navigate = useNavigate(); 
   const blogsUrl = 'http://localhost:3000/api/home/my-blogs';
-  const { data: blogsData, isPending, error } = usePost(blogsUrl);
+  const { data: blogsData, isPending, error } = useGet(blogsUrl);
   console.log(blogsData)
 
     const blogsCard = ( blog ) => {
