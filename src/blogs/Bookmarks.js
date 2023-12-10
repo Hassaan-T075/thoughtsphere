@@ -3,8 +3,8 @@ import useGet from "../models/useGet";
 
 const Bookmarks = () => {
 
-    const blogsUrl = 'http://localhost:3000/api/home/blogs';
-    const { data: blogsData, isPending, error } = useGet(blogsUrl);
+    const bookmarksUrl = 'http://localhost:3000/api/home/blogs/bookmarks';
+    const { data: blogsData, isPending, error } = useGet(bookmarksUrl);
     const navigate = useNavigate(); 
 
     const blogsCard = (blog) => {
