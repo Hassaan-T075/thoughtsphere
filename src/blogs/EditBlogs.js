@@ -1,9 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import {useNavigate} from "react-router-dom"
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -11,6 +13,7 @@ const EditBlog = () => {
   const location = useLocation();
   const blog = location.state;
   const token = useSelector((state) => state.active.token);
+  const navigate = useNavigate();
 
   // State for title and body
   const [title, setTitle] = useState(blog ? blog.title : '');
@@ -24,7 +27,24 @@ const EditBlog = () => {
     setBody(e.target.value);
   };
  
+  const handleDeleteOnClick = async(e) =>
+  {
+    e.preventDefault();
+    try {
 
+      const response = await axios.delete(`http://localhost:3000/api/home/blogs/${blog._id}`, { headers: {
+        'Authorization': `Bearer ${token}`
+    }});
+     
+      alert("Blog deleted")
+
+      navigate(-1)
+    
+    } catch (error) {
+      alert("Error Updating Blog")
+      
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault(); 
 
@@ -69,11 +89,20 @@ const EditBlog = () => {
             </div>
           )}
          <div className="text-center">
-        <button className="btn btn-link text-decoration-none">
-          <FontAwesomeIcon icon={faHeart} className="text-danger" />
-        </button>
-        <p>{blog.likes.length} Likes</p>
-      </div>
+  <button className="btn btn-link text-decoration-none">
+    <FontAwesomeIcon icon={faHeart} className="text-danger" />
+  </button>
+  <p>{blog.likes.length} Likes</p>
+
+ 
+</div>
+<div className="text-center">
+    <button className="btn btn-link text-decoration-none" onClick={handleDeleteOnClick}>
+     <FontAwesomeIcon icon={faTrash } className="text-danger" />
+     <p className="text-white"> {"Delete Blog"}</p>
+
+  </button>
+  </div>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="blogTitle" className="form-label">Blog Title</label>
@@ -91,6 +120,7 @@ const EditBlog = () => {
             <div className="text-center">
               <button type="submit" className="btn btn-primary" style ={{ width: '40%'}}>Update Blog</button>
             </div>
+
           </form>
         </div>
       
