@@ -143,7 +143,7 @@ const ViewBlog = () => {
 
   return (
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
-      <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '100vh' }}>
+      <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '120vh' }}>
         <div className="card-body p-4 align-items-center" >
           <br />
           <br />
@@ -172,6 +172,9 @@ const ViewBlog = () => {
                 <FontAwesomeIcon icon={faBookmark} className={`${isBookmarked ? 'text-danger' : 'text-white'}`} />
               </button>
             </div>)}
+            <button className="btn btn-primary" onClick={handleOpenDialog}>
+        Add Comment
+      </button>
           <form>
             <div className="mb-3">
               <label htmlFor="blogTitle" className="form-label">Blog Title</label>
@@ -183,9 +186,7 @@ const ViewBlog = () => {
               <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={blogsData ? blogsData.blog.body : ''}></textarea>
             </div>
 
-            <button className="btn btn-primary" onClick={handleOpenDialog}>
-        Add Comment
-      </button>
+           
       <br />
       <br />
             <h5 className="mb-0">Comments</h5> {/* mb-0 removes any default bottom margin from the heading */}
@@ -212,7 +213,9 @@ const ViewBlog = () => {
         </div>
       </div>
      
-
+      {/* <button className="btn btn-primary" onClick={handleOpenDialog}>
+        Add Comment
+      </button> */}
       {/* Comment Dialog */}
       {showDialog && (
         <div className="modal show" style={{ display: 'block' }}>

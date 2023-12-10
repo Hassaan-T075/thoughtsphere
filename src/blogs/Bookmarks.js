@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import useGet from "../models/useGet";
+import usePost from "../models/usePost";
 
 const Bookmarks = () => {
 
     const bookmarksUrl = 'http://localhost:3000/api/home/blogs/bookmarks';
-    const { data: blogsData, isPending, error } = useGet(bookmarksUrl);
+    const { data: bookmarksData, isPending, error } = usePost(bookmarksUrl);
     const navigate = useNavigate(); 
 
     const blogsCard = (blog) => {
@@ -24,7 +24,7 @@ const Bookmarks = () => {
             <div className="d-flex flex-wrap justify-content-center align-items-start pt-5">
                 {isPending && <p>Loading blogs...</p>}
                 {error && <p>Error fetching blogs: {error}</p>}
-                {blogsData && blogsData.blogs.map(blog => <div onClick={() => navigate("/blogs/view-blog", { state: blog })}>{blogsCard(blog)}</div>)}
+                {bookmarksData && bookmarksData.bookmarks.map(blog => <div onClick={() => navigate("/blogs/view-blog", { state: blog })}>{blogsCard(blog)}</div>)}
             </div>
         </div>
     );
