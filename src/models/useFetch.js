@@ -1,44 +1,46 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-const useFetch = (url) => {
-    const [data, setData] = useState(null)
+const useGet = (url) => {
+    const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
     const token = useSelector((state) => state.active.token);
 
     useEffect(() => {
-        const abortCont = new AbortController();
-        console.log(token)
+        const source = axios.CancelToken.source();
 
-        fetch(url, {
-            signal: abortCont.signal,
-            headers: { 'Authorization': `Bearer ${token}` }
-        }).then(res => {
-            if (!res.ok) {
-                throw Error('could not fetch data')
+        const getRequest = async () => {
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    cancelToken: source.token
+                });
+                setIsPending(false);
+                setData(response.data);
+                console.log(response.data)
+                setError(null);
+            } catch (error) {
+                if (!axios.isCancel(error)) {
+                    setError(error.message);
+                    setIsPending(false);
+                }
             }
-            return res.json(); //.json() parses the res json object into javascript object 
-        })
-            .then(data => {
-                setIsPending(false)
-                console.log(data)
-                setData(data)
-                setError(null)
-            })
-            .catch(err => {
-                if (err.name === 'AbortError') { // if error is abort error
-                    console.log('fetch aborted')
-                }
-                else { // if error is network / connection error
-                    setError(err.message)
-                    setIsPending(false)
-                }
-            })
-        return () => abortCont.abort() //to counter react state update on un-mounted component, abort controller is used 
-    }, [url,token])
+        };
 
-    return { data, isPending, error }
-}
+        if (token) {
+            getRequest();
+        }
 
-export default useFetch
+        return () => {
+            source.cancel("Component unmounted or dependencies changed");
+        };
+    }, [url, token]);
+
+    return { data, isPending, error };
+};
+
+export default useGet;
