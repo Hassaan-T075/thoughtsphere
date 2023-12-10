@@ -1,79 +1,19 @@
 import React from 'react';
-const notificationsData = [
-    {
-      id: 1,
-      title: "New Blog Post",
-      message: "Your new blog post has been published successfully.",
-      timestamp: "2023-11-14 10:00"
-    },
-    {
-      id: 2,
-      title: "Comment Received",
-      message: "Your blog post received a new comment.",
-      timestamp: "2023-11-14 09:30"
-    },
-    {
-      id: 3,
-      title: "Subscription Renewed",
-      message: "Your subscription has been renewed for another year.",
-      timestamp: "2023-11-13 15:45"
-    },
-    {
-      id: 4,
-      title: "Profile Update",
-      message: "Your profile was updated successfully.",
-      timestamp: "2023-11-13 12:10"
-    },
-    {
-      id: 5,
-      title: "New Follower",
-      message: "You have a new follower on your blog.",
-      timestamp: "2023-11-12 18:30"
-    },
-    {
-      id: 6,
-      title: "Blog Anniversary",
-      message: "Congratulations! Today is your 2-year blog anniversary.",
-      timestamp: "2023-11-12 08:00"
-    },
-    {
-      id: 7,
-      title: "Security Alert",
-      message: "New sign-in to your account was detected.",
-      timestamp: "2023-11-11 22:15"
-    },
-    {
-      id: 8,
-      title: "Payment Processed",
-      message: "Your recent payment has been processed successfully.",
-      timestamp: "2023-11-11 16:40"
-    },
-    {
-      id: 9,
-      title: "Feature Request",
-      message: "Your feature request has been submitted and is under review.",
-      timestamp: "2023-11-10 14:05"
-    },
-    {
-      id: 10,
-      title: "Collaboration Offer",
-      message: "You've received a collaboration offer from a fellow blogger.",
-      timestamp: "2023-11-10 09:20"
-    },
-    {
-      id: 11,
-      title: "System Update",
-      message: "A new update is available for your blogging platform.",
-      timestamp: "2023-11-09 20:00"
-    }
-  ];
+import usePost from '../models/usePost';
+
   
-const Notifications = ({ notifications = notificationsData }) => {
+const Notifications = () => {
+  const blogsUrl = 'http://localhost:3000/api/home/blogs/notifications';
+  const { data: notifications, isPending, error } = usePost(blogsUrl);
+  console.log(notifications);
+ 
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
           <div className="container bg-secondary text-white p-4">
             <h2 className="text-center mb-4">Notifications</h2>
-            {notificationsData.map(notification => (
+            {isPending && <p>Loading blogs...</p>}
+        {error && <p>Error fetching blogs: {error}</p>}
+            {notifications  &&notifications.notifications.map(notification => (
              <div 
              key={notification.id} 
              className="card mb-3" 
@@ -91,9 +31,9 @@ const Notifications = ({ notifications = notificationsData }) => {
              }}
            >
                 <div className="card-body">
-                  <h5 className="card-title">{notification.title}</h5>
-                  <p className="card-text">{notification.message}</p>
-                  <p className="card-text"><small className="text-muted">{notification.timestamp}</small></p>
+                  {/* <h5 className="card-title">{notification.email}</h5> */}
+                  <p className="card-text">{notification.body}</p>
+                  {/* <p className="card-text"><small className="text-muted">{new Date(notification.createdAt).toLocaleDateString()}</small></p> */}
                 </div>
               </div>
             ))}

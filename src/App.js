@@ -1,4 +1,5 @@
 import './App.css';
+// import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
@@ -12,11 +13,15 @@ import Notifications from './services/Notifications';
 import RecentBlogs from './blogs/RecentBlogs';
 import ViewBlog from './blogs/ViewBlog'
 import './App.scss'
+import { useSelector } from 'react-redux';
 
 
 function App() {
+
+  // const username = useSelector((state) => state.active.username);
+
   return (
-    <Router>
+    <switch>
       <div className="App">
         <Routes>
           <Route exact path="/auth/login" element={<Login />}></Route>
@@ -38,7 +43,7 @@ function App() {
           <Route exact path="/notifications" element={<Notifications />}></Route>
         </Routes>
       </div>
-    </Router>
+    </switch>
   );
 }
 

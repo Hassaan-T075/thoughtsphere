@@ -5,6 +5,8 @@ const initialState = {
     email: '',
     token: '',
     socials: [],
+    followings: 0,
+    followers: 0,
 };
 
 const activeSlice = createSlice({
@@ -28,9 +30,15 @@ const activeSlice = createSlice({
                 });
             }
         },
+        updateFollowings: (state, action) => {
+            state.followings = action.payload
+        },
+        updateFollowers: (state, action) => {
+            state.followers = action.payload
+        }
     },
 });
 
-export const { updateUsername, updateEmail, updateToken, updateSocials } = activeSlice.actions;
+export const { updateUsername, updateEmail, updateToken, updateSocials, updateFollowings, updateFollowers } = activeSlice.actions;
 
 export default activeSlice.reducer;

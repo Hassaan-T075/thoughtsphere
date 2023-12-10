@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const usePost = (url, body) => {
+const usePost = (url, payload) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
@@ -11,9 +11,9 @@ const usePost = (url, body) => {
     useEffect(() => {
         const source = axios.CancelToken.source();
 
-        const getRequest = async () => {
+        const postRequest = async () => {
             try {
-                const response = await axios.get(url, {
+                const response = await axios.post(url, payload, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },
@@ -21,7 +21,6 @@ const usePost = (url, body) => {
                 });
                 setIsPending(false);
                 setData(response.data);
-                console.log(response.data)
                 setError(null);
             } catch (error) {
                 if (!axios.isCancel(error)) {
@@ -32,17 +31,15 @@ const usePost = (url, body) => {
         };
 
         if (token) {
-            getRequest();
+            postRequest();
         }
 
         return () => {
             source.cancel("Component unmounted or dependencies changed");
         };
-    }, [url, token]);
+    }, [url, token, payload]);
 
     return { data, isPending, error };
 };
-
-
 
 export default usePost;

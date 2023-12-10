@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateEmail, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
+import userdata from "../services/Credentials";
+import { updateEmail, updateFollowers, updateFollowings, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Login = () => {
 
@@ -40,33 +41,55 @@ const Login = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }).then((response) => response.json())
-        .then((data) => {
-            // userdata.token = data.token
-            // userdata.username = username
-            // userdata.password = password
-            setLoading(false);
-        if(data.msg === 'Success')
-        {
-                // console.log("Logged In");
-                navigate('/');   
-        }
-        else 
-        {
-            setError(data.msg);
-        }
-            // console.log(userdata.token)
-            // console.log('logged in');   
-            // console.log(data);
+            .then((data) => {
+                // userdata.token = data.token
+                // userdata.username = username
+                // userdata.password = password
 
-            // redux operations
-            dispatch(updateEmail(data.profile.email))
-            dispatch(updateUsername(data.profile.username))
-            dispatch(updateToken(data.token))
-            dispatch(updateSocials(data.profile.socials))
-           
-        }).catch((err) => {
-            console.log(err.message)
-        })
+                // redux operations
+                dispatch(updateEmail(data.profile.email))
+                dispatch(updateUsername(data.profile.username))
+                dispatch(updateToken(data.token))
+
+                userdata.email = data.profile.email
+                userdata.username = data.profile.username
+                userdata.token = data.token
+                // userdata.socials = data.profile.socials
+                userdata.followings = data.profile.followings.length
+                userdata.followers = data.profile.followers.length
+
+                console.log(userdata)
+
+                setLoading(false);
+                if (data.msg === 'Success') {
+                    // console.log("Logged In");
+                    navigate('/');
+                }
+                else {
+                    setError(data.msg);
+                }
+                // console.log(userdata.token)
+                // console.log('logged in');   
+                // console.log(data);
+
+                // // redux operations
+                // dispatch(updateEmail(data.profile.email))
+                // dispatch(updateUsername(data.profile.username))
+                // dispatch(updateToken(data.token))
+                // dispatch(updateSocials(data.profile.socials))
+                // dispatch(updateFollowings(data.profile.followings.length))
+                // dispatch(updateFollowers(data.profile.followers.length))
+
+                // userdata.email = data.profile.email
+                // userdata.username = data.profile.username
+                // userdata.token = data.token
+                // // userdata.socials = data.profile.socials
+                // userdata.followings = data.profile.followings.length
+                // userdata.followers = data.profile.followers.length
+
+            }).catch((err) => {
+                console.log(err.message)
+            })
 
     }
 
