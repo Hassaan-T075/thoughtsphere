@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const useGet = (url) => {
+const usePost = (url, body) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
@@ -43,4 +43,6 @@ const useGet = (url) => {
     return { data, isPending, error };
 };
 
-export default useGet;
+
+
+export default usePost;

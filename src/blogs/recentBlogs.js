@@ -2,13 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios  from 'axios';
 import { useState, useEffect } from 'react';
-import useGet from '../models/useFetch';
+import useGet from '../models/useGet';
 import { useSelector } from 'react-redux';
 
 
 
 const RecentBlogs = () => {
-  const blogsUrl = 'http://localhost:3000/api/home/my-blogs';
+  const blogsUrl = 'http://localhost:3000/api/home/blogs';
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
   console.log(blogsData)
 
