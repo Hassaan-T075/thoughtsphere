@@ -14,8 +14,8 @@ const Signup = () => {
     const [lastname, setLname] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [discord, setDiscord] = useState('');
-    const [reddit, setReddit] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [whatsapp, setWhatsapp] = useState('');
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Signup = () => {
     const handleClick = (e) => {
 
         const username = firstname;
-        const social = { reddit, discord }
+        const social = { facebook, whatsapp }
         e.preventDefault() //prevents poge from refreshing
         const user = { username, password, email, social }
 
@@ -108,16 +108,16 @@ const Signup = () => {
                 <br />
                 <Row className="justify-content-md-center">
                     <Form.Label column="lg" lg={2}>
-                        Discord
+                        Facebook
                     </Form.Label>
                     <Col xs="auto">
-                        <Form.Control size="lg" type="text" placeholder="discord" onChange={(e) => setDiscord(e.target.value)} />
+                        <Form.Control size="lg" type="text" placeholder="facebook" onChange={(e) => setFacebook(e.target.value)} />
                     </Col>
                     <Form.Label column="lg" lg={2}>
-                        Reddit
+                        Whatsapp
                     </Form.Label>
                     <Col xs="auto">
-                        <Form.Control size="lg" type="text" placeholder="reddit" onChange={(e) => setReddit(e.target.value)} />
+                        <Form.Control size="lg" type="text" placeholder="whatsapp" onChange={(e) => setWhatsapp(e.target.value)} />
                     </Col>
                 </Row>
                 <br />

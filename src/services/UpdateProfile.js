@@ -35,7 +35,7 @@ const UpdateProfile = () => {
         const data = await response.json();
         console.log('Update successful:', data);
         userdata.username = newuser;
-        navigate('/');
+        navigate('/auth/login');
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -58,7 +58,7 @@ const UpdateProfile = () => {
               <label htmlFor="confirmPassword" className="form-label">Confirm Username</label>
               <input type="password" className="form-control" id="confirmPassword" onChange={(event)=>setNewuser(event.target.value)}/>
             </div> */}
-
+             
             <div className="text-center">
               <button type="submit" className="btn btn-danger" onClick={sendupdate}>Update Profile</button>
             </div>
