@@ -51,6 +51,7 @@ const Login = () => {
                 dispatch(updateUsername(data.profile.username))
                 dispatch(updateToken(data.token))
 
+                localStorage.setItem('username', data.profile.username)
                 userdata.email = data.profile.email
                 userdata.username = data.profile.username
                 userdata.token = data.token

@@ -8,6 +8,7 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
   const navigate = useNavigate(); 
   // const username = useSelector((state) => state.active.username);
   // console.log(username)
+  const u = localStorage.getItem('username')
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
           <div className="card text-white bg-secondary mb-3" style={{ width: '60vh', maxWidth: '1200px', height: '60vh' }}>
@@ -15,7 +16,8 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
                 <br />
               <img src={avatarUrl} alt="Avatar" className="rounded-circle mb-3" style={{ width: '150px', height: '150px' }} />
               <br />
-              <h3 className="card-title">{userdata.username}</h3>
+              <h3 className="card-title">{username}</h3>
+              {console.log(u)}
               <p className="card-text">Total Blogs: {totalBlogs}</p>
               <br />
               <br />

@@ -14,6 +14,7 @@ import RecentBlogs from './blogs/RecentBlogs';
 import ViewBlog from './blogs/ViewBlog'
 import './App.scss'
 import { useSelector } from 'react-redux';
+import userdata from './services/Credentials';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <Route path='/notif' element={<Notifications />} />
             <Route path='/auth/login' element={<Login />} />
           </Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
+          <Route exact path="/profile" element={<Profile username={userdata.username}/>}></Route>
           <Route exact path="/change-password" element={<ChangePassword />}></Route>
           {/* <Route exact path="/blogs/add-blog" element={<AddBlog />}></Route> */}
           {/* <Route exact path="/blogs/my-blogs" element={<MyBlogs />}></Route> */}

@@ -1,29 +1,76 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const AddBlog = () => {
-   return (
+  const token = useSelector((state) => state.active.token);
+  const email = useSelector((state) => state.active.email);
+
+  // State for title and body
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
+ 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    const newBlog = {
+      email: email,
+      title: title,
+      body: body,
+      comments: [],
+      likes: []
+    };
+
+    try {
+
+      const response = await axios.post(`http://localhost:3000/api/home/new-blog`, newBlog, { headers: {
+        'Authorization': `Bearer ${token}`
+    }});
+    console.log(response)
+    setTitle('')
+    setBody('')
+ 
+      alert("Blog Added")
+    
+    } catch (error) {
+      alert("Error Updating Blog")
+      
+    }
+   
+  };
+  return (
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
-      <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '90vh' }}>
+      <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '100vh' }}>
         <div className="card-body p-4 align-items-center" >
             <br />
             <br />
             <br />
 
-          <h3 className="card-title text-center mb-4">Add Blog</h3>
-
-          <form>
+          <h3 className="card-title text-center mb-4"> Add Blog</h3>
+          
+          
+     
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="blogTitle" className="form-label">Blog Title</label>
-              <input type="text" className="form-control" id="blogTitle" placeholder="Enter title" />
+              <input type="text" className="form-control" id="blogTitle" placeholder="Enter title"  value={title} onChange={handleTitleChange} />
             </div>
 
             <div className="mb-3">
               <label htmlFor="blogBody" className="form-label">Blog Body</label>
-              <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..."></textarea>
-            </div>
-
-            <br />
+              <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={body} onChange={handleBodyChange}></textarea>
+            </div>    
+           
             <br />
             <br />
             
@@ -32,6 +79,7 @@ const AddBlog = () => {
             </div>
           </form>
         </div>
+      
       </div>
     </div>
   );
