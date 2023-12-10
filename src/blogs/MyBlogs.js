@@ -15,7 +15,7 @@ const MyBlogs = () => {
               <div className="card-body">
                 <h5 className="card-title">{blog.title}</h5>
                 <p className="card-text">{blog.body}</p>
-                <p className="card-text"><small className="text-muted">Posted on: {blog.createdAt}</small></p>
+                <p className="card-text"><small className="text-muted">Posted on: {new Date(blog.createdAt).toLocaleDateString()}</small></p>
               </div>
             </div>
           );
@@ -28,7 +28,7 @@ const MyBlogs = () => {
         {/* {blogsData.map(blog => <div onClick={()=>navigate("/blogs/edit-blog", {state: blog})}>{blogsCard(blog)}</div>)} */}
         {isPending && <p>Loading blogs...</p>}
         {error && <p>Error fetching blogs: {error}</p>}
-        { blogsData  && blogsData.blogs.map(blog => blogsCard(blog))}
+        { blogsData  && blogsData.blogs.map(blog => <div onClick={()=>navigate("/blogs/view-blog", {state: blog})}>{blogsCard(blog)}</div>)}
       </div>
     </div>
   );

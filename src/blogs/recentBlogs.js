@@ -28,7 +28,7 @@ const RecentBlogs = () => {
         <div className="card-body">
           <h5 className="card-title">{blog.title}</h5>
           <p className="card-text">{blog.body}</p>
-          <p className="card-text"><small className="text-muted">Posted on: {blog.createdAt}</small></p>
+          <p className="card-text"><small className="text-muted">Posted on: {new Date(blog.createdAt).toLocaleDateString()}</small></p>
         </div>
       </div>
     );
