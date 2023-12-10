@@ -18,8 +18,9 @@ const MyBlogs = () => {
                 <p className="card-text"><small className="text-muted">Posted on: {new Date(blog.createdAt).toLocaleDateString()}</small></p>
               </div>
             </div>
-          );
-      };
+          </div>
+        );
+    };
 
 
   return (
@@ -31,7 +32,8 @@ const MyBlogs = () => {
         { blogsData  && blogsData.blogs.map(blog => <div onClick={()=>navigate("/blogs/edit-blog", {state: blog})}>{blogsCard(blog)}</div>)}
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default MyBlogs;

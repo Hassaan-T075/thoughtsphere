@@ -6,8 +6,6 @@ import useGet from '../models/useGet';
 import {useNavigate} from "react-router-dom"
 import { useSelector } from 'react-redux';
 
-
-
 const RecentBlogs = () => {
   const blogsUrl = 'http://localhost:3000/api/home/blogs';
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
