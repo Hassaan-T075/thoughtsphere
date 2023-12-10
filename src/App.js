@@ -5,7 +5,7 @@ import Login from './auth/Login';
 import Signup from './auth/Signup';
 import Homepage from './home/Homepage';
 import Profile from './services/Profile';
-import ChangePassword from './services/ChangePassword';
+import UpdateProfile from './services/UpdateProfile';
 import AddBlog from './blogs/AddBlog';
 import MyBlogs from './blogs/MyBlogs';
 import EditBlogs from './blogs/EditBlogs';
@@ -34,8 +34,8 @@ function App() {
             <Route path='/notif' element={<Notifications />} />
             <Route path='/auth/login' element={<Login />} />
           </Route>
-          <Route exact path="/profile" element={<Profile username={userdata.username}/>}></Route>
-          <Route exact path="/change-password" element={<ChangePassword />}></Route>
+          <Route exact path="/profile" element={<Profile />}></Route>
+          <Route exact path="/update-profile" element={<UpdateProfile />}></Route>
           {/* <Route exact path="/blogs/add-blog" element={<AddBlog />}></Route> */}
           {/* <Route exact path="/blogs/my-blogs" element={<MyBlogs />}></Route> */}
           <Route exact path="/blogs/edit-blog" element={<EditBlogs />}></Route>

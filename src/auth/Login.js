@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import userdata from "../services/Credentials";
+// import userdata from "../services/Credentials";
 import { updateEmail, updateFollowers, updateFollowings, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Login = () => {
@@ -51,15 +51,16 @@ const Login = () => {
                 dispatch(updateUsername(data.profile.username))
                 dispatch(updateToken(data.token))
 
-                localStorage.setItem('username', data.profile.username)
-                userdata.email = data.profile.email
-                userdata.username = data.profile.username
-                userdata.token = data.token
-                // userdata.socials = data.profile.socials
-                userdata.followings = data.profile.followings.length
-                userdata.followers = data.profile.followers.length
+                const userdata = {
+                    email: data.profile.email,
+                    username : data.profile.username,
+                    token: data.token,
+                    socials: data.profile.socials,
+                    followers: data.profile.followers.length,
+                    followings: data.profile.followings.length,
+                }
 
-                console.log(userdata)
+                localStorage.setItem('userdata', JSON.stringify(userdata))
 
                 setLoading(false);
                 if (data.msg === 'Success') {
