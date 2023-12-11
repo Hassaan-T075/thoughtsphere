@@ -11,6 +11,7 @@ const usePost = (url, payload) => {
     const token = userdata.token
 
     useEffect(() => {
+
         const source = axios.CancelToken.source();
 
         const postRequest = async () => {
@@ -39,7 +40,7 @@ const usePost = (url, payload) => {
         return () => {
             source.cancel("Component unmounted or dependencies changed");
         };
-    }, [url, token, payload]);
+    }, [url, token]);
 
     return { data, isPending, error };
 };

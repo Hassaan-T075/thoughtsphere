@@ -7,7 +7,7 @@ const RecentBlogs = () => {
   const blogsUrl = 'http://localhost:3000/api/home/blogs';
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
   const navigate = useNavigate(); 
-  
+ 
   const blogsCard = (blog) => {
     return (
       <div className="card bg-light text-dark m-3" style={{ width: '18rem', cursor: 'pointer', transition: 'transform .3s, box-shadow .3s' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.03)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>

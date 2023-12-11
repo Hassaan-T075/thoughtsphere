@@ -80,7 +80,7 @@ const Sidebar = () => {
         </Navbar>
         <div className='sidebar'>
             <div className="sidebar__logo">
-                Animate
+                ThoughtSphere
             </div>
             <div ref={sidebarRef} className="sidebar__menu">
                 <div
@@ -104,8 +104,11 @@ const Sidebar = () => {
                         </Link>
                     ))
                 }
+                
+                
             </div>
         </div>
+       
     </>;
 };
 

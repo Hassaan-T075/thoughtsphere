@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const AddBlog = () => {
-  const token = useSelector((state) => state.active.token);
-  const email = useSelector((state) => state.active.email);
+  const storedData = localStorage.getItem('userdata')
+
+  const userdata = storedData ? JSON.parse(storedData) : {};
+  const token = userdata.token
+  const email = userdata.email
+
 
   // State for title and body
   const [title, setTitle] = useState('');
@@ -33,7 +36,7 @@ const AddBlog = () => {
 
     try {
 
-      const response = await axios.post(`http://localhost:3000/api/home/new-blog`, newBlog, { headers: {
+     await axios.post(`http://localhost:3000/api/home/new-blog`, newBlog, { headers: {
         'Authorization': `Bearer ${token}`
     }});
   

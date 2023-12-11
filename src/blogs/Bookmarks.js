@@ -24,7 +24,7 @@ const Bookmarks = () => {
             <div className="d-flex flex-wrap justify-content-center align-items-start pt-5">
                 {isPending && <p>Loading blogs...</p>}
                 {error && <p>Error fetching blogs: {error}</p>}
-                {bookmarksData && bookmarksData.bookmarks.map(blog => <div onClick={() => navigate("/blogs/view-blog", { state: blog })}>{blogsCard(blog)}</div>)}
+                {bookmarksData && bookmarksData.bookmarkBlogs.map(blog => <div onClick={() => navigate("/blogs/view-blog", { state: blog })}>{blogsCard(blog)}</div>)}
             </div>
         </div>
     );

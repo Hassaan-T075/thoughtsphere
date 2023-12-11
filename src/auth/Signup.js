@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { updateEmail, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Signup = () => {
@@ -42,7 +42,7 @@ const Signup = () => {
         .then((data) => {
             setLoading(false);
             if (data.msg === 'Success') {
-                navigate('/');
+                navigate('/auth/login');
             }
             else if (data.msg === 'User Already Exist. Please Login.') {
                 setError("User Already Exists");
@@ -54,7 +54,7 @@ const Signup = () => {
                 setError("Error Occured, Please Register Again")
             }
 
-            // console.log(userdata.token)
+         
           
 
             // redux operations
@@ -73,7 +73,7 @@ const Signup = () => {
         <>
             <AuthNavbar />
             <br />
-            <Container className="p-5 border border-info rounded-pill">
+            <Container className="p-5 border" style={{ borderColor: '#ADD8E6' }}>
                 <br />
                 <Row className="justify-content-md-center">
                     <Form.Label column="lg" lg={2}>

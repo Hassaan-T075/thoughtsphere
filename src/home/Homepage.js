@@ -9,75 +9,37 @@ import store from '../store';
 
 const HomePage = () => {
   return (
-    // <Container className="p-0 m-0">
-    //   <Row>
-    //     {/* Sidebar */}
-    //     <Col xs={12} md={3} lg={2} className="sidebar bg-danger">
-    //       <Nav defaultActiveKey="/home" className="flex-column">
-    //         <Nav.Link href="/home">Home</Nav.Link>
-    //         <Nav.Link href="/about">About</Nav.Link>
-    //         <Nav.Link href="/services">Services</Nav.Link>
-    //         <Nav.Link href="/contact">Contact</Nav.Link>
-    //       </Nav>
-    //     </Col>
-
-    //     {/* Page Content */}
-    //     <Col xs={12} md={9} lg={10} className="p-0 m-0">
-    //       <div>
-    //         {/* Navbar at the top */}
-    //         <Navbar bg="primary" variant="dark" expand="lg">
-    //           <Container>
-    //             <Navbar.Brand href="#home">Thoughtsphere</Navbar.Brand>
-    //             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //             <Navbar.Collapse id="basic-navbar-nav">
-    //               <Nav className="ms-auto">
-    //                 <Nav.Link href="/home">Home</Nav.Link>
-    //                 <Nav.Link href="/thoughts">Thoughts</Nav.Link>
-    //                 <Nav.Link href="/profile">Profile</Nav.Link>
-    //               </Nav>
-    //             </Navbar.Collapse>
-    //           </Container>
-    //         </Navbar>
-
-    //         {/* Main content area */}
-    //         <Container fluid className="mb-4">
-    //           <div style={{ minHeight: '70vh' }}> {/* This div should be as tall as the content requires */}
-    //             {/* Dummy content */}
-    //             <h1>Welcome to Our Website</h1>
-    //             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.</p>
-    //             {/* Repeat the dummy text or add other content as needed to fill the page */}
-    //           </div>
-    //         </Container>
-
-    //         {/* Footer at the bottom */}
-    //         <footer className="footer py-3 bg-primary text-white">
-    //           <Container className="d-flex justify-content-between">
-    //             <span>© 2023 thoughtsphere</span>
-    //             <div>
-    //               {/* Social media icons with additional margin */}
-    //               <a href="https://discord.com" className="text-white me-4" aria-label="Discord">
-    //                 <FontAwesomeIcon icon={faDiscord} size="lg" />
-    //               </a>
-    //               <a href="https://reddit.com" className="text-white me-4" aria-label="Reddit">
-    //                 <FontAwesomeIcon icon={faRedditAlien} size="lg" />
-    //               </a>
-    //               <a href="https://instagram.com" className="text-white me-3" aria-label="Instagram">
-    //                 <FontAwesomeIcon icon={faInstagram} size="lg" />
-    //               </a>
-    //             </div>
-    //           </Container>
-    //         </footer>
-    //       </div>
-    //     </Col>
-    //   </Row>
-    // </Container>
+    
     <div style={{
-      padding: '50px 0px 0px 370px'
+      padding: '0px 0px 0px 370px',
     }}>
       <Sidebar />
-      <Outlet />
-      {/* {console.log(store.getState())} */}
+    
+      {/* Outlet container with limited space */}
+      <div style={{
+    height: '87vh', // Set the height to be 100% of the viewport height
+    overflowY: 'auto', // Adds a scrollbar if content exceeds the height
+    overflowX: 'hidden', // Prevents horizontal scrolling
+  }}>
+        <Outlet />
+      </div>
+    
+      <Navbar bg="primary" variant="dark" expand="lg">
+        <Container>
+          <span className="text-white">© 2023 Thoughtsphere</span>
+          <Nav className="justify-content-end">
+            <Nav.Link href="/privacy">Privacy Policy</Nav.Link>
+            <Nav.Link href="/terms">Terms of Use</Nav.Link>
+            {/* Social Media Icons */}
+            <Nav.Link href="https://facebook.com"><i className="bx bxl-facebook"></i></Nav.Link>
+            <Nav.Link href="https://twitter.com"><i className="bx bxl-twitter"></i></Nav.Link>
+            <Nav.Link href="https://instagram.com"><i className="bx bxl-instagram"></i></Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
     </div>
+    
+    
   );
 };
 

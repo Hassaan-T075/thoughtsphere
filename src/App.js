@@ -16,6 +16,7 @@ import './App.scss'
 import { useSelector } from 'react-redux';
 import userdata from './services/Credentials';
 import Bookmarks from './blogs/Bookmarks';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           {/* <Route exact path="/blogs/recent-blogs" element={<RecentBlogs />}></Route> */}
           <Route exact path="/notifications" element={<Notifications />}></Route>
         </Routes>
+        
       </div>
     </switch>
   );

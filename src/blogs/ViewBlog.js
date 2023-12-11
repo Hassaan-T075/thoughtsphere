@@ -3,16 +3,21 @@ import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+
 import useGet from '../models/useGet';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const ViewBlog = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const blog = location.state;
   const blogsUrl = `http://localhost:3000/api/home/blogs/${blog._id}`;
   const { data: blogsData, isPending, error } = useGet(blogsUrl);
   const storedData = localStorage.getItem('userdata')
+
   const userdata = storedData ? JSON.parse(storedData) : {};
   const token = userdata.token
 
@@ -20,8 +25,6 @@ const ViewBlog = () => {
 
   const [comment, setComment] = useState('');
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const [isLiked, setisLiked] = useState(false);
   const handleCloseDialog = () => setShowDialog(false);
   const handleOpenDialog = () => setShowDialog(true);
 
@@ -45,7 +48,8 @@ const ViewBlog = () => {
       });
 
       alert(response.data.msg)
-      setisLiked(true)
+      window.location.reload();
+     
 
     } catch (error) {
     
@@ -54,31 +58,7 @@ const ViewBlog = () => {
     }
 
   }
-  const handleFollowOnClick = async () =>
-  {
-    try {
 
-      const response = await axios.post('http://localhost:3000/api/home/profile/follow',{
-  
-      "user_follow": blogsData.blog.email
-  
-  },
-   {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      alert(response.data.msg)
-   
-
-    } catch (error) {
-    
-      alert("Error adding added")
-
-    }
-
-  }
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
@@ -88,7 +68,7 @@ const ViewBlog = () => {
     event.preventDefault();
     const newComment = {
       id: blog._id,
-      email: "test",
+      email: userdata.email,
       comment: comment
     }
 
@@ -101,6 +81,7 @@ const ViewBlog = () => {
       });
 
       alert("comment added")
+      window.location.reload();
 
     } catch (error) {
    
@@ -130,8 +111,8 @@ const ViewBlog = () => {
           'Authorization': `Bearer ${token}`
         }
       });
-      setIsBookmarked(!isBookmarked);
-
+     
+      alert(response.data.msg)
     } catch (error) {
       
       console.error('Error adding bookmark:', error);
@@ -143,17 +124,18 @@ const ViewBlog = () => {
 
   return (
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
+
       <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '120vh' }}>
         <div className="card-body p-4 align-items-center" >
           <br />
-          <br />
-          <br />
+         
+          
 
           <h3 className="card-title text-center mb-4">Blog</h3>
           {blogsData && (
-  <div className="d-flex justify-content-center align-items-center text-white mb-3">
-    <strong>Written by:</strong> {blogsData.blog.email}
-    <button className="btn btn-primary ms-2" onClick={handleFollowOnClick}>Follow User</button>
+  <div className="d-flex justify-content-center align-items-center text-white mb-3" onClick={()=>navigate("/view-profile", {state: blogsData.blog.email})} >
+    <strong>Written by:  </strong> { blogsData.blog.email}
+  
   </div>
 )}
 
@@ -162,19 +144,25 @@ const ViewBlog = () => {
               <strong>Posted on:</strong> {new Date(blogsData.blog.createdAt).toLocaleDateString()}
             </div>
           )}
-          {blogsData && (
-            <div className="text-center">
-              <button className="btn btn-link text-decoration-none" onClick={handleLikeOnClick}>
-                <FontAwesomeIcon icon={faHeart} className={`${isLiked ? 'text-danger' : 'text-white'}`} />
-              </button>
-              <p>{blogsData.blog.likes.length} Likes</p>
-              <button className="btn btn-link text-decoration-none" onClick={handleBookmark}>
-                <FontAwesomeIcon icon={faBookmark} className={`${isBookmarked ? 'text-danger' : 'text-white'}`} />
-              </button>
-            </div>)}
-            <button className="btn btn-primary" onClick={handleOpenDialog}>
-        Add Comment
+         {blogsData && (
+  <div className="text-center">
+    <div className="d-flex justify-content-center align-items-center">
+      <button className="btn btn-link text-decoration-none" onClick={handleLikeOnClick}>
+        <FontAwesomeIcon icon={faHeart} className="text-danger" />
       </button>
+      <p className="mx-2 my-0 d-flex align-items-center">{blogsData.blog.likes.length} Likes</p>
+      <button className="btn btn-link text-decoration-none" onClick={handleBookmark}>
+        <FontAwesomeIcon icon={faBookmark} className="text-blue" />
+      </button>
+      <button className="btn btn-primary ms-2" onClick={handleOpenDialog}>
+        <FontAwesomeIcon icon={faComment} />
+      </button>
+    </div>
+  </div>
+)}
+
+         
+           
           <form>
             <div className="mb-3">
               <label htmlFor="blogTitle" className="form-label">Blog Title</label>
@@ -186,11 +174,11 @@ const ViewBlog = () => {
               <textarea className="form-control" id="blogBody" rows="6" placeholder="Write your blog here..." value={blogsData ? blogsData.blog.body : ''}></textarea>
             </div>
 
-           
+          
       <br />
       <br />
             <h5 className="mb-0">Comments</h5> {/* mb-0 removes any default bottom margin from the heading */}
-            <div className="mt-4" style={{ maxHeight: '100px', overflowY: 'auto' }}>
+            <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
 
               {blogsData && blogsData.blog.comments.map((comment, index) => (
                 <div key={index} className="card bg-light mb-2">
@@ -206,17 +194,11 @@ const ViewBlog = () => {
             <br />
             <br />
 
-            {/* <div className="text-center">
-              <button type="submit" className="btn btn-primary" style ={{ width: '40%'}}>Add Blog</button>
-            </div> */}
+           
           </form>
         </div>
       </div>
-     
-      {/* <button className="btn btn-primary" onClick={handleOpenDialog}>
-        Add Comment
-      </button> */}
-      {/* Comment Dialog */}
+    
       {showDialog && (
         <div className="modal show" style={{ display: 'block' }}>
           <div className="modal-dialog">

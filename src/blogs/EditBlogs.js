@@ -6,13 +6,14 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import {useNavigate} from "react-router-dom"
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const EditBlog = () => {
   const location = useLocation();
   const blog = location.state;
-  const token = useSelector((state) => state.active.token);
+  const storedData = localStorage.getItem('userdata')
+  const userdata = storedData ? JSON.parse(storedData) : {};
+  const token = userdata.token
   const navigate = useNavigate();
 
   // State for title and body
@@ -32,7 +33,7 @@ const EditBlog = () => {
     e.preventDefault();
     try {
 
-      const response = await axios.delete(`http://localhost:3000/api/home/blogs/${blog._id}`, { headers: {
+      await axios.delete(`http://localhost:3000/api/home/blogs/${blog._id}`, { headers: {
         'Authorization': `Bearer ${token}`
     }});
      
@@ -56,12 +57,13 @@ const EditBlog = () => {
 
     try {
 
-      const response = await axios.patch(`http://localhost:3000/api/home/blogs/${blog._id}`, updatedBlog, { headers: {
+      await axios.patch(`http://localhost:3000/api/home/blogs/${blog._id}`, updatedBlog, { headers: {
         'Authorization': `Bearer ${token}`
     }});
  
+
       alert("Blog updated")
-    
+      navigate(-1)
     } catch (error) {
       alert("Error Updating Blog")
       
@@ -73,8 +75,7 @@ const EditBlog = () => {
     <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
       <div className="card text-white bg-secondary mb-3" style={{ width: '100vh', height: '100vh' }}>
         <div className="card-body p-4 align-items-center" >
-            <br />
-            <br />
+      
             <br />
 
           <h3 className="card-title text-center mb-4">Blog</h3>

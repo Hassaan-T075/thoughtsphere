@@ -6,14 +6,14 @@ const Notifications = () => {
   const blogsUrl = 'http://localhost:3000/api/home/blogs/notifications';
   const { data: notifications, isPending, error } = usePost(blogsUrl);
   
- 
+ console.log(notifications)
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
-          <div className="container bg-secondary text-white p-4">
-            <h2 className="text-center mb-4">Notifications</h2>
+         {notifications &&notifications.notifications.length!=0 &&<div className="container bg-secondary text-white p-4">
+           {notifications && notifications.notifications.length!=0 &&<h2 className="text-center mb-4">Notifications</h2>}
             {isPending && <p>Loading blogs...</p>}
         {error && <p>Error fetching blogs: {error}</p>}
-            {notifications  &&notifications.notifications.map(notification => (
+            {notifications  && notifications.notifications.map(notification => (
              <div 
              key={notification.id} 
              className="card mb-3" 
@@ -37,7 +37,7 @@ const Notifications = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div>}
         </div>
       );
 };
