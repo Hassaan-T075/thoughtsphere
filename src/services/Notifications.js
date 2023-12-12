@@ -9,8 +9,8 @@ const Notifications = () => {
  console.log(notifications)
     return (
         <div className="container-fluid bg-dark min-vh-100 d-flex align-items-center justify-content-center">
-         {notifications &&notifications.notifications.length!=0 &&<div className="container bg-secondary text-white p-4">
-           {notifications && notifications.notifications.length!=0 &&<h2 className="text-center mb-4">Notifications</h2>}
+         {notifications &&notifications.notifications.length!==0 &&<div className="container bg-secondary text-white p-4">
+           {notifications && notifications.notifications.length!==0 &&<h2 className="text-center mb-4">Notifications</h2>}
             {isPending && <p>Loading blogs...</p>}
         {error && <p>Error fetching blogs: {error}</p>}
             {notifications  && notifications.notifications.map(notification => (

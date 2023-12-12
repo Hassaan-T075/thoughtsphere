@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
 import '../App.css'
-import { Navbar, Nav, Container, Row, Col, Footer } from 'react-bootstrap';
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord, faRedditAlien, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar'
-import store from '../store';
 
 const HomePage = () => {
   return (

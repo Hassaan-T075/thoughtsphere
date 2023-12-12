@@ -1,6 +1,5 @@
 import './App.css';
-// import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import Homepage from './home/Homepage';
@@ -13,15 +12,9 @@ import Notifications from './services/Notifications';
 import RecentBlogs from './blogs/RecentBlogs';
 import ViewBlog from './blogs/ViewBlog'
 import './App.scss'
-import { useSelector } from 'react-redux';
-import userdata from './services/Credentials';
 import Bookmarks from './blogs/Bookmarks';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-
 
 function App() {
-
-  // const username = useSelector((state) => state.active.username);
 
   return (
     <switch>

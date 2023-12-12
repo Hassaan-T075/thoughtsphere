@@ -15,7 +15,7 @@ const ViewBlog = () => {
   const location = useLocation();
   const blog = location.state;
   const blogsUrl = `http://localhost:3000/api/home/blogs/${blog._id}`;
-  const { data: blogsData, isPending, error } = useGet(blogsUrl);
+  const { data: blogsData } = useGet(blogsUrl);
   const storedData = localStorage.getItem('userdata')
 
   const userdata = storedData ? JSON.parse(storedData) : {};
