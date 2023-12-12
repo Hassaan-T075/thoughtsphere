@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './sidebar.scss';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
@@ -43,6 +43,15 @@ const sidebarNavItems = [
 ]
 
 const Sidebar = () => {
+    const storedData = localStorage.getItem('userdata')
+    const userdata = storedData ? JSON.parse(storedData) : {};
+    const token = userdata.token
+    const navigate = useNavigate(); 
+    if(!token)
+    {
+      navigate('/auth/login')
+    }
+  
     const [activeIndex, setActiveIndex] = useState(0);
     const [stepHeight, setStepHeight] = useState(0);
     const sidebarRef = useRef();
