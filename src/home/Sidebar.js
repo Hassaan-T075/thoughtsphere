@@ -37,7 +37,7 @@ const sidebarNavItems = [
     {
         display: 'Log out',
         icon: <i className='bx bx-user'></i>,
-        to: 'auth/login',
+        to: 'logout',
         section: 'logout'
     },
 ]
@@ -46,12 +46,12 @@ const Sidebar = () => {
     const storedData = localStorage.getItem('userdata')
     const userdata = storedData ? JSON.parse(storedData) : {};
     const token = userdata.token
-    const navigate = useNavigate(); 
-    if(!token)
-    {
-      navigate('/auth/login')
+    const navigate = useNavigate();
+
+    if (!token) {
+        navigate('/auth/login')
     }
-  
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [stepHeight, setStepHeight] = useState(0);
     const sidebarRef = useRef();
@@ -113,11 +113,11 @@ const Sidebar = () => {
                         </Link>
                     ))
                 }
-                
-                
+
+
             </div>
         </div>
-       
+
     </>;
 };
 
