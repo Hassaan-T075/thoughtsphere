@@ -2,6 +2,7 @@ import '../App.css'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar'
+import 'boxicons/css/boxicons.min.css';
 
 const HomePage = () => {
   return (
@@ -24,12 +25,10 @@ const HomePage = () => {
         <Container>
           <span className="text-white">© 2023 Thoughtsphere</span>
           <Nav className="justify-content-end">
-            <Nav.Link href="/privacy">Privacy Policy</Nav.Link>
-            <Nav.Link href="/terms">Terms of Use</Nav.Link>
-            {/* Social Media Icons */}
-            <Nav.Link href="https://facebook.com"><i className="bx bxl-facebook"></i></Nav.Link>
-            <Nav.Link href="https://twitter.com"><i className="bx bxl-twitter"></i></Nav.Link>
-            <Nav.Link href="https://instagram.com"><i className="bx bxl-instagram"></i></Nav.Link>
+            <Nav.Link href="/privacy-policy">Privacy Policy</Nav.Link>
+            <Nav.Link href="/about-us">About Us</Nav.Link>
+            <Nav.Link href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="bx bxl-facebook bx-tada-hover"></i></Nav.Link>
+            <Nav.Link href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><i className="bx bxl-whatsapp bx-tada-hover"></i></Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -24,19 +24,19 @@ const sidebarNavItems = [
     },
     {
         display: 'Notifications',
-        icon: <i className='bx bx-receipt'></i>,
+        icon: <i className='bx bx-bell'></i>,
         to: 'notif',
         section: 'notif'
     },
     {
         display: 'Bookmarks',
-        icon: <i className='bx bx-user'></i>,
+        icon: <i className='bx bx-bookmarks'></i>,
         to: 'bookmarks',
         section: 'bookmarks'
     },
     {
         display: 'Log out',
-        icon: <i className='bx bx-user'></i>,
+        icon: <i className='bx bx-log-out'></i>,
         to: 'logout',
         section: 'logout'
     },
@@ -81,7 +81,6 @@ const Sidebar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        {/* <Nav.Link href="/thoughts">Thoughts</Nav.Link> */}
                         <Nav.Link href="/profile">Profile</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
