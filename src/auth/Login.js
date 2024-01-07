@@ -1,12 +1,11 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthNavbar from "./AuthNavbar";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
-import {  useDispatch } from 'react-redux';
-// import userdata from "../services/Credentials";
+import { useDispatch } from 'react-redux';
 import { updateEmail, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Login = () => {
@@ -17,7 +16,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
 
     const handleClick = (e) => {
 
@@ -31,14 +30,14 @@ const Login = () => {
             body: JSON.stringify(body)
         }).then((response) => response.json())
             .then((data) => {
-               
+
                 dispatch(updateEmail(data.profile.email))
                 dispatch(updateUsername(data.profile.username))
                 dispatch(updateToken(data.token))
 
                 const userdata = {
                     email: data.profile.email,
-                    username : data.profile.username,
+                    username: data.profile.username,
                     token: data.token,
                     socials: data.profile.socials,
                     followers: data.profile.followers.length,
@@ -55,11 +54,11 @@ const Login = () => {
                 else {
                     setError(data.msg);
                 }
-              
+
 
             }).catch((err) => {
                 alert(err.message)
-              
+
             })
 
     }
@@ -67,40 +66,29 @@ const Login = () => {
     return (
         <>
             <AuthNavbar />
-            <br />
-            <Container className="p-5 border" style={{ borderColor: '#ADD8E6' }}>
-                <br />
+            <Container className="mt-5">
                 <Row className="justify-content-md-center">
-                    <Form.Label column="lg" lg={2}>
-                        Email
-                    </Form.Label>
-                    <Col xs="auto">
-                        <Form.Control size="lg" type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    </Col>
-                </Row>
-                <br />
-                <Row className="justify-content-md-center">
-                    <Form.Label column="lg" lg={2}>
-                        Password
-                    </Form.Label>
-                    <Col xs="auto">
-                        <Form.Control size="lg" type="text" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    </Col>
-                </Row>
-                <br />
-                <Row>
-                    <Col>
-                        <Button
-                            variant="outline-info"
-                            disabled={isLoading}
-                            onClick={!isLoading ? handleClick : null}
-                        >
-                            {isLoading ? 'Loading…' : 'Log in'}
-                        </Button>
-                    </Col>
-                    <label>{error}</label>
-                </Row>
+                    <Col md={6} className="bg-light p-4 rounded shadow">
+                        <h2 className="text-center mb-4">Login</h2>
+                        <Form>
+                            <Form.Group controlId="formEmail" className="mb-3">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} />
+                            </Form.Group>
 
+                            <Form.Group controlId="formPassword" className="mb-3">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} />
+                            </Form.Group>
+
+                            <Button variant="primary" block disabled={isLoading} onClick={!isLoading ? handleClick : null} className="mb-3">
+                                {isLoading ? 'Loading…' : 'Log in'}
+                            </Button>
+
+                            {error && <Form.Text className="text-danger">{error}</Form.Text>}
+                        </Form>
+                    </Col>
+                </Row>
             </Container>
         </>
     );
