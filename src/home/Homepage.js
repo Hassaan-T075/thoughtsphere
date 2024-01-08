@@ -5,6 +5,12 @@ import Sidebar from './Sidebar'
 import 'boxicons/css/boxicons.min.css';
 
 const HomePage = () => {
+
+  const storedData = localStorage.getItem('userdata')
+  const userdata = storedData ? JSON.parse(storedData) : {};
+  const facebook = userdata.social[0].facebook
+  const twitter = userdata.social[0].twitter
+
   return (
     
     <div style={{
@@ -27,8 +33,8 @@ const HomePage = () => {
           <Nav className="justify-content-end">
             <Nav.Link href="/privacy-policy">Privacy Policy</Nav.Link>
             <Nav.Link href="/about-us">About Us</Nav.Link>
-            <Nav.Link href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="bx bxl-facebook bx-tada-hover"></i></Nav.Link>
-            <Nav.Link href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><i className="bx bxl-whatsapp bx-tada-hover"></i></Nav.Link>
+            <Nav.Link href={"https://www.facebook.com/" + facebook} target="_blank" rel="noopener noreferrer"><i className="bx bxl-facebook bx-tada-hover"></i></Nav.Link>
+            <Nav.Link href={"https://www.twitter.com/" + twitter} target="_blank" rel="noopener noreferrer"><i className="bx bxl-twitter bx-tada-hover"></i></Nav.Link>
           </Nav>
         </Container>
       </Navbar>

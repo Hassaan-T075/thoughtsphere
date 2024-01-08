@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 // import { useLocation } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useGet from '../models/useGet';
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
+import { FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
 
 const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d2317cece28bd6b0e24ad9fd8.png", onChangePassword }) => {
   const navigate = useNavigate();
@@ -13,6 +13,9 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
   const blogsUrl = `http://localhost:3000/api/home/profile`;
   const { data: profileData } = useGet(blogsUrl);
   const userdata = storedData ? JSON.parse(storedData) : {};
+  console.log(userdata)
+  const facebook = userdata.social[0].facebook
+  const twitter = userdata.social[0].twitter
 
 
   const handleFacebookClick = () => {
@@ -46,8 +49,8 @@ const Profile = ({ avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d
           <br />
           <br />
           <div className="mb-3">
-            <FaFacebook size={30} style={{ marginRight: '10px', cursor: 'pointer' }} onClick={handleFacebookClick} />
-            <FaWhatsapp size={30} style={{ cursor: 'pointer' }} onClick={handleWhatsAppClick} />
+            <a href={"https://www.facebook.com/" + facebook} target="_blank" rel="noopener noreferrer"><FaFacebook size={30} style={{ marginRight: '10px', cursor: 'pointer' }} /> </a>
+            <a href={"https://www.twitter.com/" + twitter} target="_blank" rel="noopener noreferrer"><FaTwitter size={30} style={{ cursor: 'pointer' }} /> </a>
           </div>
           <button className="btn btn-danger" onClick={() => navigate("/update-profile")}>Update Profile</button>
         </div>

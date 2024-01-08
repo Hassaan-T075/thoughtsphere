@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const UpdateProfile = () => {
 
   const [newuser, setNewuser] = useState("")
+  const [newfacebook, setNewfacebook] = useState("")
+  const [newtwitter, setNewtwitter] = useState("")
   const navigate = useNavigate();
 
   const storedData = localStorage.getItem('userdata')
@@ -15,7 +17,11 @@ const UpdateProfile = () => {
     event.preventDefault()
     const profileUrl = 'http://localhost:3000/api/home/update-profile';
     const body = {
-      username: newuser
+      username: newuser,
+      social: [{
+        facebook: newfacebook,
+        twitter: newtwitter,
+      }],
     }
     try {
       const response = await fetch(profileUrl, {
@@ -46,15 +52,19 @@ const UpdateProfile = () => {
 
           <form>
             <div className="mb-3">
-              <label htmlFor="newPassword" className="form-label">New Username</label>
-              <input type="text" className="form-control" id="newPassword" onChange={(event) => setNewuser(event.target.value)} />
+              <label htmlFor="newUsername" className="form-label">New Username</label>
+              <input type="text" className="form-control" id="newUsername" onChange={(event) => setNewuser(event.target.value)} />
+              <label htmlFor="newFacebook" className="form-label">New Facebook</label>
+              <input type="text" className="form-control" id="newFacebook" onChange={(event) => setNewfacebook(event.target.value)} />
+              <label htmlFor="newTwitter" className="form-label">New Twitter</label>
+              <input type="text" className="form-control" id="newTwitter" onChange={(event) => setNewtwitter(event.target.value)} />
             </div>
 
             {/* <div className="mb-3">
               <label htmlFor="confirmPassword" className="form-label">Confirm Username</label>
               <input type="password" className="form-control" id="confirmPassword" onChange={(event)=>setNewuser(event.target.value)}/>
             </div> */}
-             
+
             <div className="text-center">
               <button type="submit" className="btn btn-danger" onClick={sendupdate}>Update Profile</button>
             </div>

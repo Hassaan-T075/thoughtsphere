@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container } from "react-bootstrap";
 import { useDispatch } from 'react-redux';
-import { updateEmail, updateSocials, updateToken, updateUsername } from "../features/active/activeSlice";
+import { updateEmail, updateSocial, updateToken, updateUsername } from "../features/active/activeSlice";
 
 const Signup = () => {
 
@@ -15,7 +15,7 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [facebook, setFacebook] = useState('');
-    const [whatsapp, setWhatsapp] = useState('');
+    const [twitter, setTwitter] = useState('');
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Signup = () => {
     const handleClick = (e) => {
 
         const username = firstname;
-        const social = { facebook, whatsapp }
+        const social = { facebook, twitter }
         e.preventDefault() //prevents poge from refreshing
         const user = { username, password, email, social }
 
@@ -61,7 +61,7 @@ const Signup = () => {
                 dispatch(updateEmail(data.profile.email))
                 dispatch(updateUsername(data.profile.username))
                 dispatch(updateToken(data.token))
-                dispatch(updateSocials(data.profile.socials))
+                dispatch(updateSocial(data.profile.social))
 
             }).catch((err) => {
                 setError(err.message);
@@ -105,8 +105,8 @@ const Signup = () => {
                                     <Form.Control size="lg" type="text" placeholder="Facebook" onChange={(e) => setFacebook(e.target.value)} />
                                 </Col>
                                 <Col lg={6}>
-                                    <Form.Label>WhatsApp</Form.Label>
-                                    <Form.Control size="lg" type="text" placeholder="WhatsApp" onChange={(e) => setWhatsapp(e.target.value)} />
+                                    <Form.Label>Twitter</Form.Label>
+                                    <Form.Control size="lg" type="text" placeholder="Twitter" onChange={(e) => setTwitter(e.target.value)} />
                                 </Col>
                             </Row>
 

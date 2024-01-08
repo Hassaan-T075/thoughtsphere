@@ -39,7 +39,7 @@ const Login = () => {
                     email: data.profile.email,
                     username: data.profile.username,
                     token: data.token,
-                    socials: data.profile.socials,
+                    social: data.profile.social,
                     followers: data.profile.followers.length,
                     followings: data.profile.followings.length,
                 }
