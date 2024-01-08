@@ -191,8 +191,8 @@ const ViewBlog = () => {
             </div>
 
 
-            <br />
-            <br />
+            {/* <br />
+            <br /> */}
 
            
           </form>

@@ -53,7 +53,7 @@ const UpdateProfile = () => {
           <form>
             <div className="mb-3">
               <label htmlFor="newUsername" className="form-label">New Username</label>
-              <input type="text" className="form-control" id="newUsername" onChange={(event) => setNewuser(event.target.value)} />
+              <input type="text" className="form-control" id="newUsername" onChange={(event) => setNewuser(event.target.value)} value={userdata.username} />
               <label htmlFor="newFacebook" className="form-label">New Facebook</label>
               <input type="text" className="form-control" id="newFacebook" onChange={(event) => setNewfacebook(event.target.value)} />
               <label htmlFor="newTwitter" className="form-label">New Twitter</label>

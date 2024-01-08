@@ -16,6 +16,7 @@ import Bookmarks from './blogs/Bookmarks';
 import Logout from './auth/Logout';
 import Policy from './services/Policy';
 import About from './services/About';
+import ViewProfile from './blogs/ViewProfile';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/blogs/edit-blog" element={<EditBlogs />}></Route>
           <Route exact path="/blogs/view-blog" element={<ViewBlog />}></Route>
           <Route exact path="/notifications" element={<Notifications />}></Route>
+          <Route exact path="/view-profile" element={<ViewProfile />}></Route>
           <Route exact path="/privacy-policy" element={<Policy />}></Route>
           <Route exact path="/about-us" element={<About />}></Route>
         </Routes>

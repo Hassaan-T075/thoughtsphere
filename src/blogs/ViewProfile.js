@@ -1,11 +1,9 @@
 import React from 'react';
 import {useLocation} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
+import { FaFacebook, FaTwitter } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
 import usePost from '../models/usePost';
 import axios from 'axios';
-
-
 
 const ViewProfile = () => {
   const avatarUrl = "https://i.pinimg.com/originals/0f/1a/26/0f1a262d2317cece28bd6b0e24ad9fd8.png"
@@ -17,10 +15,12 @@ const ViewProfile = () => {
   }
   const { data: profileData } = usePost(blogsUrl, body);
 
+  console.log(profileData.profile)
   const storedData = localStorage.getItem('userdata')
   const userdata = storedData ? JSON.parse(storedData) : {};
   const token = userdata.token
-
+  const facebook = profileData.profile.social[0].facebook
+  const twitter = profileData.profile.social[0].twitter
 
  
    const handleFacebookClick = () => {
@@ -79,8 +79,8 @@ const ViewProfile = () => {
               <br />
               <br />
               <div className="mb-3">
-            <FaFacebook size={30} style={{ marginRight: '10px', cursor: 'pointer' } } onClick={handleFacebookClick} />
-            <FaWhatsapp size={30} style={{ cursor: 'pointer' }} onClick = {handleWhatsAppClick} />
+              <a href={"https://www.facebook.com/" + facebook} target="_blank" rel="noopener noreferrer"><FaFacebook size={30} style={{ marginRight: '10px', cursor: 'pointer' }} /> </a>
+            <a href={"https://www.twitter.com/" + twitter} target="_blank" rel="noopener noreferrer"><FaTwitter size={30} style={{ cursor: 'pointer' }} /> </a>
           </div>
             
             </div>
